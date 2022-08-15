@@ -1,0 +1,116 @@
+.qrcode {
+	border-radius: 1rem;
+	width: max-content;
+	height: max-content;
+	overflow: hidden;
+	position: relative;
+	&:hover .download {
+		opacity: 0.8;
+	}
+	.download {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		padding: 0.5rem;
+		background: #fff;
+		border-radius: 0.5rem;
+		color: #000;
+		font-size: 1rem;
+		opacity: 0;
+		cursor: pointer;
+		transition: all 0.2s ease-in-out;
+		path {
+			transition: all 0.2s ease-in-out;
+		}
+		&:hover {
+			background: var(--primary-color);
+			color: #fff;
+			opacity: 1;
+
+			path {
+				fill: #fff;
+			}
+		}
+	}
+}
+.container {
+	display: flex;
+	justify-content: center;
+
+	flex-direction: column;
+	align-items: center;
+}
+.shorturl {
+	padding: 1.2rem 1.4rem;
+	font-size: 1.5rem;
+	border-radius: 1rem;
+	background-color: #fff;
+	border: 1px solid transparent;
+	margin-top: 1.5rem;
+	max-width: 41.2rem;
+	width: 100%;
+	position: relative;
+	height: 100%;
+	&:hover {
+		background: linear-gradient(#fff 0 0) padding-box,
+			linear-gradient(to right, var(--primary-color), var(--secondary-color))
+				border-box;
+		.copy {
+			opacity: 1;
+		}
+	}
+
+	.copy {
+		position: absolute;
+		right: 1rem;
+
+		background: #fff;
+		border-radius: 0.5rem;
+
+		color: #000;
+		font-size: 1.5rem;
+
+		opacity: 0;
+		cursor: pointer;
+
+		background: #000;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		&:hover {
+			background: linear-gradient(
+				to right,
+				var(--primary-color) 0%,
+				var(--secondary-color) 100%
+			);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+	}
+}
+.btn {
+	margin-top: 1.5rem;
+	width: 100%;
+	max-width: 41.2rem;
+	padding: 1.2rem 1.4rem;
+	border-radius: 1rem;
+	background-color: var(--secondary-color);
+	color: #fff;
+	font-size: 1.5rem;
+	text-align: center;
+	font-weight: bold;
+	cursor: pointer;
+	transition: all 0.2s ease-in-out;
+	&:hover {
+		background-color: var(--secondary-color-dark);
+	}
+}
+.qrcontainer {
+	margin-top: 5rem;
+}
+.link {
+	font-size: 1.2rem;
+	color: #000;
+	text-align: center;
+	margin-top: 0.5rem;
+	text-decoration: none;
+}

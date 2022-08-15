@@ -1,0 +1,27 @@
+.logo {
+	cursor: pointer;
+	transition: transform 0.2s ease-in-out;
+	display: flex;
+	justify-content: center;
+	margin-top: 7rem;
+	text-decoration: none;
+	span {
+		font-size: 7rem;
+		font-weight: normal;
+	}
+	.timmy {
+		color: var(--primary-color);
+	}
+	.url {
+		color: var(--secondary-color);
+	}
+	.suffix {
+		color: var(--primary-color);
+		font-family: var(--font-logo);
+	}
+	&:hover,
+	&:focus {
+		outline: none;
+		transform: scale(1.05);
+	}
+}
