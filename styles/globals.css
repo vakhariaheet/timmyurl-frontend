@@ -10,14 +10,18 @@
 	--primary-color: #0a58ff;
 	--primary-color-dark: #0041cc;
 	--secondary-color: #ef5d60;
-	--background-color: #0a58ff40;
+	--background-color: linear-gradient(
+		to bottom right,
+		#bdcff2 0%,
+		#6d9efe 100%
+	);
 	--secondary-color-dark: #ed4548;
 	--font-primary: 'Quicksand', sans-serif;
 	--font-logo: 'Dancing Script', cursive;
 }
 html {
 	font-size: 62.5%;
-	background-color: var(--background-color);
+	background: var(--background-color);
 }
 label {
 	display: block;
