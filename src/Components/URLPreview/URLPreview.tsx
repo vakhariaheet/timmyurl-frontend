@@ -1,14 +1,15 @@
-import * as React from 'react';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
+import React from 'react';
+import { useSearchParams } from 'react-router-dom';
+import styles from './URLPreview.module.scss';
 import { QRCode } from 'react-qrcode-logo';
-import styles from './url.module.scss';
+import QRLogo from './../../assets/images/logo.png';
 import html2canvas from 'html2canvas';
 import Logo from '../../Components/Logo/Logo';
-const URLInfo: NextPage = () => {
-	const router = useRouter();
-	const ref = React.useRef<HTMLCanvasElement>(null);
-	const { url } = router.query;
+export interface URLPreviewProps {}
+
+const URLPreview: React.FC<URLPreviewProps> = () => {
+	const [searchParams, setSearchParams] = useSearchParams();
+	const url = searchParams.get('url');
 	const download = () => {
 		html2canvas(document.querySelector('#react-qrcode-logo') as any).then(
 			function (canvas) {
@@ -37,9 +38,7 @@ const URLInfo: NextPage = () => {
 					{url && (
 						<QRCode
 							value={url as string}
-							logoImage={'/logo.png'}
-							logoHeight={30}
-							logoWidth={30}
+							logoImage={QRLogo}
 							size={231}
 							removeQrCodeBehindLogo={true}
 							qrStyle='dots'
@@ -84,4 +83,5 @@ const URLInfo: NextPage = () => {
 		</div>
 	);
 };
-export default URLInfo;
+
+export default URLPreview;
