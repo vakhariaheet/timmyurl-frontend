@@ -8,7 +8,7 @@ import Logo from '../../Components/Logo/Logo';
 export interface URLPreviewProps {}
 
 const URLPreview: React.FC<URLPreviewProps> = () => {
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	const url = searchParams.get('url');
 	const download = () => {
 		html2canvas(document.querySelector('#react-qrcode-logo') as any).then(
