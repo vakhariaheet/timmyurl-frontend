@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Register.scss';
 import { GoogleLogin } from '@react-oauth/google';
 import FacebookLogin from 'react-facebook-login';
 export interface RegisterProps {}
 
 const Register: React.FC<RegisterProps> = () => {
+	useEffect(() => {
+		localStorage.setItem(`fblst_${process.env.REACT_APP_FACEBOOK_ID}`, '');
+	}, []);
 	return (
 		<section className='register'>
 			<div className='register-box'>
