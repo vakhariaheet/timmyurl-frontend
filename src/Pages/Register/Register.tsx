@@ -13,7 +13,7 @@ const Register: React.FC<RegisterProps> = () => {
 				autoLoad={true}
 				fields='name,email,picture'
 				onClick={() => console.log('clicked')}
-				callback={(data: any) => console.log(data)}
+				callback={(data: any) => console.log('facebook', data)}
 			/>
 			<GoogleLogin onSuccess={(data) => console.log(data)} />
 		</section>
