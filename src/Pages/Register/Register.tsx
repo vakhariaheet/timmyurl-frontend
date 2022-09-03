@@ -7,6 +7,7 @@ export interface RegisterProps {}
 const Register: React.FC<RegisterProps> = () => {
 	useEffect(() => {
 		localStorage.setItem(`fblst_${process.env.REACT_APP_FACEBOOK_ID}`, '');
+		sessionStorage.setItem(`fbssls_${process.env.REACT_APP_FACEBOOK_ID}`, '');
 	}, []);
 	return (
 		<section className='register'>
@@ -14,7 +15,6 @@ const Register: React.FC<RegisterProps> = () => {
 				<FacebookLogin
 					appId={process.env.REACT_APP_FACEBOOK_ID as string}
 					autoLoad={true}
-					scope='pages_show_list'
 					fields='name,email,picture'
 					onClick={() => console.log('clicked')}
 					callback={(data: any) => console.log('facebook', data)}
