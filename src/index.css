@@ -15,6 +15,7 @@
 		#bdcff2 0%,
 		#6d9efe 100%
 	);
+
 	--secondary-color-dark: #ed4548;
 	--font-primary: 'Quicksand', sans-serif;
 	--font-logo: 'Dancing Script', cursive;
@@ -22,6 +23,10 @@
 html {
 	font-size: 62.5%;
 	background: var(--background-color);
+}
+body {
+	min-height: 100vh;
+	height: 100%;
 }
 label {
 	display: block;
