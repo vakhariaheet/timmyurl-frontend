@@ -3,6 +3,7 @@ import React from 'react';
 import { FacebookProvider } from 'react-facebook';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Login from './Pages/Login/Login';
 import PrivacyPolicy from './Pages/PrivacyPolicy/PrivacyPolicy';
 import Register from './Pages/Register/Register';
 import TermsOfService from './Pages/TermsOfService/TermsOfService';
@@ -19,6 +20,7 @@ function App() {
 					<Route path='/terms-and-conditions' element={<TermsOfService />} />
 					<Route path='/url' element={<URLPreview />} />
 					<Route path='/register' element={<Register />} />
+					<Route path='/login' element={<Login />} />
 					<Route path='*' element={<div>404 Page</div>} />
 				</Routes>
 			</GoogleOAuthProvider>

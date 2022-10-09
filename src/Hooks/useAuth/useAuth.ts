@@ -22,7 +22,23 @@ const useAuth: UseAuth = () => {
 	const user = useSelector<IRootState, IRootUser>((state) => state.user);
 	const api = useAPI();
 	const dispatch = useDispatch();
-	const login: UseAuthFuncs['login'] = async (data) => {};
+	const login: UseAuthFuncs['login'] = async (data) => {
+		try {
+			const { data: LoginResp } = await api.post<{
+				data: {
+					user: User;
+					tokens: Tokens;
+				};
+			}>('/api/auth/login', {
+				data,
+			});
+			if (LoginResp.data) {
+				dispatch(setUser(LoginResp.data));
+			}
+		} catch (err) {
+			throw err;
+		}
+	};
 	const register: UseAuthFuncs['register'] = async (data) => {
 		try {
 			const { data: RegisterResp } = await ApiService.post<{

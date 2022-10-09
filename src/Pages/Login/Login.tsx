@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './Register.scss';
+import { useSpring, animated, useTransition } from 'react-spring';
+import './Login.scss';
 import { useGoogleLogin } from '@react-oauth/google';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import { useSpring, useTransition, animated } from 'react-spring';
 import Logo from '../../Components/Logo/Logo';
 
 import useAuth from '../../Hooks/useAuth/useAuth';
 import { createShortcut } from '../../utils/KeyBoardShortcuts';
-export interface RegisterProps {}
+export interface LoginProps {}
 
-const Register: React.FC<RegisterProps> = () => {
-	const [name, setName] = React.useState('');
+const Login: React.FC<LoginProps> = () => {
 	const [email, setEmail] = React.useState('');
 	const [password, setPassword] = React.useState('');
 	const [showPassword, setShowPassword] = React.useState(false);
@@ -39,38 +38,40 @@ const Register: React.FC<RegisterProps> = () => {
 		enter: { transform: 'translateX(0px)', opacity: 1 },
 		leave: { transform: 'translateX(10px)', opacity: 0 },
 	});
+
 	const auth = useAuth();
 	const login: any = useGoogleLogin({
 		async onSuccess(tokenResponse) {
 			console.log(tokenResponse);
 			try {
 				await auth.googleLogin(tokenResponse);
+				setShowError(false);
 				navigate('/');
 			} catch (err) {
 				console.log(err);
+				setError(`Couldn't login with Google, Please try again`);
+				setShowError(true);
 			}
 		},
 	});
 	const onFacebookLogin = async (response: any) => {
 		try {
 			await auth.facebookLogin(response);
+			setShowError(false);
+
 			navigate('/');
 		} catch (err) {
 			console.log(err);
+			setError("Couldn't login with facebook,Please try again");
+			setShowError(true);
 		}
 	};
 	const navigate = useNavigate();
-	const onRegister = async () => {
+	const onLogin = async () => {
 		setIsLoading(true);
 		if (showError) return setIsLoading(false);
-		if (!password && !email && !name) {
+		if (!password && !email) {
 			setError('Please fill all the fields');
-			setShowError(true);
-			setIsLoading(false);
-			return;
-		}
-		if (!name) {
-			setError('Please enter your name');
 			setShowError(true);
 			setIsLoading(false);
 			return;
@@ -95,14 +96,18 @@ const Register: React.FC<RegisterProps> = () => {
 		}
 
 		try {
-			await auth.register({
-				name,
+			await auth.login({
 				email,
 				password,
 			});
 			navigate('/');
-		} catch (error) {
-			console.log(error);
+			setShowError(false);
+			setIsLoading(false);
+		} catch (error: any) {
+			console.dir(error);
+			setError(error.response.data.message);
+			setShowError(true);
+			setIsLoading(false);
 		}
 	};
 	useEffect(() => {
@@ -111,11 +116,7 @@ const Register: React.FC<RegisterProps> = () => {
 	}, []);
 	return (
 		<div className='register--container'>
-			<nav
-				style={{
-					marginBottom: '6rem',
-				}}
-			>
+			<nav>
 				<Logo type='navbar' />
 			</nav>
 			<section className='register'>
@@ -187,27 +188,6 @@ const Register: React.FC<RegisterProps> = () => {
 						<div className='register--line--right'></div>
 					</div>
 					<form className='register--form' onSubmit={(e) => e.preventDefault()}>
-						<label htmlFor='name'>
-							<input
-								type='text'
-								value={name}
-								onChange={(e) => {
-									setName(e.target.value);
-									setShowError(false);
-								}}
-								onKeyDown={(e) => {
-									createShortcut({
-										key: 'Enter',
-										event: e,
-										callback: onRegister,
-									});
-								}}
-								placeholder='Full Name'
-								id='name'
-								name='name'
-								className='register--input'
-							/>
-						</label>
 						<label htmlFor='email'>
 							<input
 								type='text'
@@ -216,11 +196,14 @@ const Register: React.FC<RegisterProps> = () => {
 									setEmail(e.target.value);
 									setShowError(false);
 								}}
-								onKeyDown={(e) => {
+								onKeyDown={(event) => {
 									createShortcut({
+										event,
 										key: 'Enter',
-										event: e,
-										callback: onRegister,
+										callback: onLogin,
+										options: {
+											preventDefault: true,
+										},
 									});
 								}}
 								placeholder='Email'
@@ -270,15 +253,10 @@ const Register: React.FC<RegisterProps> = () => {
 									setPassword(e.target.value);
 									setShowError(false);
 								}}
-								placeholder='Password'
-								id='password'
-								autoComplete='new-password'
-								name='password'
-								className='register--input'
 								onKeyDown={(e) => {
 									createShortcut({
 										key: 'Enter',
-										callback: onRegister,
+										callback: onLogin,
 										event: e,
 										options: {
 											preventDefault: true,
@@ -296,13 +274,23 @@ const Register: React.FC<RegisterProps> = () => {
 										},
 									});
 								}}
+								placeholder='Password'
+								id='password'
+								autoComplete='new-password'
+								name='password'
+								className='register--input login--input'
 							/>
 						</label>
+						<div className='register--forgotPassword--container '>
+							<Link to='/forgot-password' className='register--forgotPassword'>
+								Forgot Password?
+							</Link>
+						</div>
 
 						<animated.button
 							type='submit'
 							className='register--submit'
-							onClick={onRegister}
+							onClick={onLogin}
 							style={loadingStyles}
 						>
 							{btnStyles((styles, item) => (
@@ -312,18 +300,14 @@ const Register: React.FC<RegisterProps> = () => {
 										position: 'absolute',
 									}}
 								>
-									{!item ? 'Register' : 'Loading'}
+									{!item ? 'Login' : 'Loading'}
 								</animated.span>
 							))}
 						</animated.button>
 					</form>
+
 					<p className='register--link'>
-						Already have an account? <Link to='/login'>Login</Link>
-					</p>
-					<p className='register--info'>
-						By clicking Register, you agree to our{' '}
-						<Link to='/terms-and-conditions'>Terms of Use</Link> and{' '}
-						<Link to='/privacy-policy'>Privacy Policy</Link>
+						Don't have an account? <Link to='/register'>Register</Link>
 					</p>
 					<animated.p className='register--error' style={errorStyles}>
 						{error || ' '}
@@ -334,4 +318,4 @@ const Register: React.FC<RegisterProps> = () => {
 	);
 };
 
-export default Register;
+export default Login;
