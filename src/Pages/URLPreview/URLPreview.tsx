@@ -43,7 +43,7 @@ const URLPreview: React.FC<URLPreviewProps> = () => {
 				<div className={styles.qrcode}>
 					{url && (
 						<QRCode
-							value={url as string}
+							value={`https://timmyurl.in/${url}` as string}
 							logoImage={QRLogo}
 							size={canvasSize}
 							removeQrCodeBehindLogo={true}
