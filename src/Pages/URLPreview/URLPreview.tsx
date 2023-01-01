@@ -72,7 +72,7 @@ const URLPreview: React.FC<URLPreviewProps> = () => {
 			</div>
 
 			<div className={styles.shorturl}>
-				<span>timmyurl.in/{url}</span>
+				<span>{url}</span>
 				<a
 					href={`https://timmyurl.in/${url}`}
 					className={styles.copy}
