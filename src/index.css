@@ -5,6 +5,7 @@
 	padding: 0;
 	box-sizing: border-box;
 	font-family: 'Quicksand', sans-serif;
+	font-weight: 400;
 }
 :root {
 	--primary-color: #0a58ff;
@@ -18,6 +19,7 @@
 
 	--secondary-color-dark: #ed4548;
 	--font-primary: 'Quicksand', sans-serif;
+
 	--font-logo: 'Dancing Script', cursive;
 }
 html {

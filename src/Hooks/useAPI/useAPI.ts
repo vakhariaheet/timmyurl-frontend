@@ -54,34 +54,34 @@ const useAPI = () => {
 	};
 	const get = async <T>(path: string, options?: AxiosRequestConfig) => {
 		return axios.get<T>(
-			`${process.env.REACT_APP_API_SERVER}${path}`,
+			`${import.meta.env.VITE_API_SERVER}${path}`,
 			addAuthHeader(options),
 		);
 	};
 	const post = async <T>(path: string, options?: AxiosRequestConfig) => {
 		return axios.post<T>(
-			`${process.env.REACT_APP_API_SERVER}${path}`,
+			`${import.meta.env.VITE_API_SERVER}${path}`,
 			options?.data,
 			addAuthHeader(options),
 		);
 	};
 	const put = async <T>(path: string, options?: AxiosRequestConfig) => {
 		return axios.put<T>(
-			`${process.env.REACT_APP_API_SERVER}${path}`,
+			`${import.meta.env.VITE_API_SERVER}${path}`,
 			options?.data,
 			addAuthHeader(options),
 		);
 	};
 	const patch = async <T>(path: string, options?: AxiosRequestConfig) => {
 		return axios.patch<T>(
-			`${process.env.REACT_APP_API_SERVER}${path}`,
+			`${import.meta.env.VITE_API_SERVER}${path}`,
 			options?.data,
 			addAuthHeader(options),
 		);
 	};
 	const del = async <T>(path: string, options?: AxiosRequestConfig) => {
 		return axios.delete<T>(
-			`${process.env.REACT_APP_API_SERVER}${path}`,
+			`${import.meta.env.VITE_API_SERVER}${path}`,
 			addAuthHeader(options),
 		);
 	};

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styles from './URLPreview.module.scss';
 import { QRCode } from 'react-qrcode-logo';
@@ -10,13 +10,14 @@ export interface URLPreviewProps {}
 const URLPreview: React.FC<URLPreviewProps> = () => {
 	const [searchParams] = useSearchParams();
 	const url = searchParams.get('url');
+	const [canvasSize, setCanvasSize] = React.useState(231);
 	const download = () => {
 		html2canvas(document.querySelector('#react-qrcode-logo') as any).then(
 			function (canvas) {
 				console.log(canvas);
 				const link = document.createElement('a');
 
-				link.download = `qrcode (${url}).png`;
+				link.download = `qrcode (timmyurl.in/${url}).png`;
 				console.log(canvas);
 				link.href = canvas.toDataURL();
 				link.click();
@@ -24,6 +25,11 @@ const URLPreview: React.FC<URLPreviewProps> = () => {
 			},
 		);
 	};
+	useEffect(() => {
+		if (window.innerWidth < 500) {
+			setCanvasSize(window.innerWidth - 100);
+		}
+	}, []);
 	const onCopy = async () => {
 		if (typeof url !== 'string') return;
 		await navigator.clipboard.writeText(url);
@@ -39,11 +45,13 @@ const URLPreview: React.FC<URLPreviewProps> = () => {
 						<QRCode
 							value={url as string}
 							logoImage={QRLogo}
-							size={231}
+							size={canvasSize}
 							removeQrCodeBehindLogo={true}
 							qrStyle='dots'
 							eyeRadius={10}
-							quietZone={20}
+							quietZone={10}
+							logoWidth={25}
+							logoHeight={25}
 						/>
 					)}
 
@@ -64,9 +72,9 @@ const URLPreview: React.FC<URLPreviewProps> = () => {
 			</div>
 
 			<div className={styles.shorturl}>
-				<span>{url}</span>
+				<span>timmyurl.in/{url}</span>
 				<a
-					href={url}
+					href={`https://timmyurl.in/${url}`}
 					className={styles.copy}
 					target={'_blank'}
 					rel='noreferrer'

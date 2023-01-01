@@ -20,7 +20,7 @@ export default class ApiService {
 	public static get(url: string, externalConfig: AxiosRequestConfig) {
 		return axios({
 			method: 'get',
-			url: `${process.env.REACT_APP_API_SERVER}${url}`,
+			url: `${import.meta.env.VITE_API_SERVER}${url}`,
 			headers: {
 				Authorization: `Bearer ${ApiService.token}`,
 				'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export default class ApiService {
 	}
 	public static post<T>(url: string, externalConfig: AxiosRequestConfig) {
 		return axios.post<T>(
-			`${process.env.REACT_APP_API_SERVER}${url}`,
+			`${import.meta.env.VITE_API_SERVER}${url}`,
 			externalConfig.data,
 			{
 				headers: {
@@ -44,7 +44,7 @@ export default class ApiService {
 	public static put(url: string, externalConfig: AxiosRequestConfig) {
 		return axios({
 			method: 'put',
-			url: `${process.env.REACT_APP_API_SERVER}${url}`,
+			url: `${import.meta.env.VITE_API_SERVER}${url}`,
 			headers: {
 				Authorization: `Bearer ${ApiService.token}`,
 				'Content-Type': 'application/json',

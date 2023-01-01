@@ -100,14 +100,22 @@ const Register: React.FC<RegisterProps> = () => {
 				email,
 				password,
 			});
-			navigate('/');
-		} catch (error) {
+			navigate('/confirm-email', {
+				state: {
+					email,
+				},
+			});
+		} catch (error: any) {
 			console.log(error);
+			console.log(error.response.data.message);
+			setError(error.response.data.message);
+			setShowError(true);
+			setIsLoading(false);
 		}
 	};
 	useEffect(() => {
-		localStorage.setItem(`fblst_${process.env.REACT_APP_FACEBOOK_ID}`, '');
-		sessionStorage.setItem(`fbssls_${process.env.REACT_APP_FACEBOOK_ID}`, '');
+		localStorage.setItem(`fblst_${import.meta.env.VITE_FACEBOOK_ID}`, '');
+		sessionStorage.setItem(`fbssls_${import.meta.env.VITE_FACEBOOK_ID}`, '');
 	}, []);
 	return (
 		<div className='register--container'>
@@ -121,7 +129,7 @@ const Register: React.FC<RegisterProps> = () => {
 			<section className='register'>
 				<div className='register-box'>
 					<FacebookLogin
-						appId={process.env.REACT_APP_FACEBOOK_ID as string}
+						appId={import.meta.env.VITE_FACEBOOK_ID as string}
 						fields='name,email,picture'
 						onClick={() => console.log('clicked')}
 						callback={onFacebookLogin}
@@ -285,7 +293,7 @@ const Register: React.FC<RegisterProps> = () => {
 										},
 									});
 									createShortcut({
-										key: 'h',
+										key: 'k',
 										callback: () => {
 											setShowPassword((prevShowPassword) => !prevShowPassword);
 										},

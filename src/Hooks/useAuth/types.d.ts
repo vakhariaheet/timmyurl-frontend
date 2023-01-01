@@ -20,7 +20,7 @@ export interface UseAuthFuncs {
 
 	googleLogin: GoogleLoginFunction;
 	facebookLogin: FacebookSignInFunction;
-	verifyToken: (token: string) => Promise<void>;
+	verifyToken: (token: string) => Promise<any>;
 	resendToken: () => Promise<void>;
 	logout: () => void;
 	getUser: () => User | null;

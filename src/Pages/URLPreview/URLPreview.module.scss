@@ -1,3 +1,4 @@
+@import '../../Variable.scss';
 .qrcode {
 	border-radius: 1rem;
 	width: max-content;
@@ -38,8 +39,15 @@
 	justify-content: flex-start;
 	height: 100%;
 	min-height: 100vh;
+	// gap: 2rem;
 	flex-direction: column;
 	align-items: center;
+}
+.canvas {
+	@media (max-width: $screen-xs) {
+		width: 100%;
+		height: 100%;
+	}
 }
 .shorturl {
 	padding: 1.2rem 1.4rem;
@@ -49,6 +57,7 @@
 	border: 1px solid transparent;
 	margin-top: 1.5rem;
 	max-width: 41.2rem;
+	overflow-x: hidden;
 	width: 100%;
 	display: flex;
 	position: relative;
@@ -90,7 +99,7 @@
 	}
 }
 .btn {
-	margin-top: 1.5rem;
+	margin-top: 1rem;
 	width: 100%;
 	max-width: 41.2rem;
 	padding: 1.2rem 1.4rem;
@@ -106,13 +115,14 @@
 		background: var(--secondary-color-dark);
 	}
 }
-.qrcontainer {
-	margin-top: 5rem;
-}
+
 .link {
 	font-size: 1.2rem;
 	color: #000;
 	text-align: center;
 	margin-top: 0.5rem;
 	text-decoration: none;
+}
+.qrcontainer {
+	margin-top: 1rem;
 }
