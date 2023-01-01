@@ -17,7 +17,7 @@ const URLPreview: React.FC<URLPreviewProps> = () => {
 				console.log(canvas);
 				const link = document.createElement('a');
 
-				link.download = `qrcode (timmyurl.in/${url}).png`;
+				link.download = `qrcode (${url}).png`;
 				console.log(canvas);
 				link.href = canvas.toDataURL();
 				link.click();
@@ -43,7 +43,7 @@ const URLPreview: React.FC<URLPreviewProps> = () => {
 				<div className={styles.qrcode}>
 					{url && (
 						<QRCode
-							value={`https://timmyurl.in/${url}` as string}
+							value={url as string}
 							logoImage={QRLogo}
 							size={canvasSize}
 							removeQrCodeBehindLogo={true}
