@@ -1,0 +1,57 @@
+.confirmemail {
+	&-icon {
+		height: auto;
+		width: 10rem;
+		svg {
+			height: 100%;
+			width: 100%;
+		}
+	}
+	&__content {
+		p {
+			font-size: 1.5rem;
+			margin: 1rem;
+		}
+		.bold {
+			font-weight: bold;
+			color: var(--primary-color);
+		}
+		button:nth-of-type(1) {
+			font-size: 2rem;
+			border: 1px solid var(--primary-color);
+			padding: 1rem 2rem;
+			color: var(--primary-color);
+			background: transparent;
+			margin: 1rem;
+			border-radius: 1rem;
+			cursor: pointer;
+			margin-bottom: 0;
+			width: 100%;
+			&:disabled {
+				background: var(--primary-color);
+				color: #fff;
+				opacity: 0.5;
+				pointer-events: none;
+				user-select: none;
+			}
+			&:hover {
+				background: var(--primary-color);
+				color: #fff;
+			}
+		}
+		button:nth-of-type(2) {
+			font-size: 1.4rem;
+			text-align: center;
+			background: transparent;
+			margin: 1rem;
+			cursor: pointer;
+			border: none;
+			&:hover {
+				color: var(--primary-color);
+			}
+		}
+		.faded {
+			opacity: 0.5;
+		}
+	}
+}

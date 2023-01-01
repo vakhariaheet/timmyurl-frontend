@@ -1,0 +1,55 @@
+@import '../../Variable.scss';
+.logo {
+	cursor: pointer;
+	transition: scale 0.2s ease-in-out;
+	display: flex;
+
+	text-decoration: none;
+	span {
+		font-weight: normal;
+		transition: all 0.2s ease;
+	}
+	.timmy {
+		color: var(--primary-color);
+	}
+	.url {
+		color: var(--secondary-color);
+	}
+	.suffix {
+		color: var(--primary-color);
+		font-family: var(--font-logo);
+	}
+
+	&.logoDisplay {
+		margin-top: 7rem;
+		&:hover,
+		&:focus {
+			outline: none;
+			scale: 1.05;
+		}
+	}
+	&.logoNavbar {
+		margin: 0;
+		padding: 1rem 1.5rem;
+		&:hover,
+		&:focus {
+			outline: none;
+			scale: 1.05;
+			// .spanNavbar {
+			// 	outline: none;
+			// 	font-size: 3rem;
+			// }
+		}
+	}
+	.spanDisplay {
+		font-size: 7rem;
+		justify-content: center;
+		@media (max-width: $screen-xs) {
+			font-size: 3rem;
+		}
+	}
+	.spanNavbar {
+		font-size: 2.5rem;
+		justify-content: flex-start;
+	}
+}
