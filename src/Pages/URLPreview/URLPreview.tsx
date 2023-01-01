@@ -74,7 +74,7 @@ const URLPreview: React.FC<URLPreviewProps> = () => {
 			<div className={styles.shorturl}>
 				<span>{url}</span>
 				<a
-					href={`https://timmyurl.in/${url}`}
+					href={url}
 					className={styles.copy}
 					target={'_blank'}
 					rel='noreferrer'
